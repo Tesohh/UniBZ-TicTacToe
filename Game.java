@@ -1,13 +1,13 @@
 public class Game {
     public enum Mark {
-        None, // the cell is empty
+        EMPTY, // no mark placed
         X, // player 1
         O; // player 2
 
         // properly formats the mark when printing etc.
         public String toString() {
             switch (this) {
-                case None:
+                case EMPTY:
                     return " ";
                 case O:
                     return "O";
@@ -26,7 +26,7 @@ public class Game {
         this.grid = new Mark[3][3];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                grid[i][j] = Mark.None;
+                grid[i][j] = Mark.EMPTY;
             }
         }
     }
