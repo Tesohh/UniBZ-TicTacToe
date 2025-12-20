@@ -1,0 +1,1 @@
+- [ ] consider configuring formatter to format code in required style
