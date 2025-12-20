@@ -12,7 +12,16 @@ or her work.
 
 class Main {
     public static void main(String[] args) {
-        var game = new Game();
-        game.debug();
+        System.out.println("programmed by: " + ANSI.FG_BLACK + ANSI.BG_PURPLE + " Tesini Simone " + ANSI.RESET);
+        var player1 = new HumanPlayer();
+        var player2 = new HumanPlayer();
+
+        var game = new Game(player1, player2);
+
+        while (true) {
+            game.nextTurn();
+        }
+
+        // game.debug();
     }
 }

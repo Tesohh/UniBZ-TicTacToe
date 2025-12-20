@@ -1,1 +1,4 @@
 - [ ] consider configuring formatter to format code in required style
+- [ ] remove all debug (dbg:) stuff
+- [ ] WASD movement for selecting cell
+- [ ] resolve all TODOs
