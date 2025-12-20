@@ -20,6 +20,7 @@ public class Game {
     }
 
     public Mark[][] grid;
+    public int turns = 0; // when even = player 1's turn, when odd = player 2's turn
 
     public Game() {
         this.grid = new Mark[3][3];
