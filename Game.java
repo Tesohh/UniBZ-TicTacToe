@@ -96,14 +96,79 @@ public class Game {
         grid[move.row()][move.col()] = mark;
 
         this.turns += 1;
+        return checkWin(mark);
+    }
 
-        // check wins
+    // prints out an ugly version of the grid for debug purposes
+    public void debug() {
+        for (var row : this.grid) {
+            for (var cell : row) {
+                System.out.print(cell);
+            }
+            System.out.println();
+        }
+    }
+
+    public Situation checkWin(Mark mark) throws IllegalArgumentException {
+        // if a win is detected, who would it be?
+        Situation candidateWinner;
+        if (mark == Mark.X) {
+            candidateWinner = Situation.Player1Win;
+        } else if (mark == Mark.O) {
+            candidateWinner = Situation.Player2Win;
+        } else {
+            throw new IllegalArgumentException(
+                    "invalid argument passed to checkWin. Can either be Mark.X or Mark.O. Should be unreachable.");
+        }
+
+        // check wins for `mark` (we don't need to check the only mark.)
+        // check for all rows, if one has all cells == mark
+        for (int row = 0; row < 3; row++) {
+            var allMark = true;
+            for (int col = 0; col < 3; col++) {
+                if (this.grid[row][col] != mark) {
+                    allMark = false;
+                    break;
+                }
+            }
+            if (allMark) {
+                return candidateWinner;
+            }
+        }
+        // check for all columns, if one has all cells == mark
+        for (int col = 0; col < 3; col++) {
+            var allMark = true;
+            for (int row = 0; row < 3; row++) {
+                if (this.grid[row][col] != mark) {
+                    allMark = false;
+                    break;
+                }
+            }
+            if (allMark) {
+                return candidateWinner;
+            }
+        }
+
+        // check diagonal case
+        // X..
+        // .X.
+        // ..X
+        if (this.grid[0][0] == mark && this.grid[1][1] == mark && this.grid[2][2] == mark) {
+            return candidateWinner;
+        }
+
+        // ..X
+        // .X.
+        // X..
+        if (this.grid[0][2] == mark && this.grid[1][1] == mark && this.grid[2][0] == mark) {
+            return candidateWinner;
+        }
 
         // check draw
         var noEmptys = true;
-        for (var row : this.grid) {
-            for (var cell : row) {
-                if (cell == Mark.EMPTY) {
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                if (this.grid[row][col] == Mark.EMPTY) {
                     noEmptys = false;
                     break;
                 }
@@ -119,16 +184,6 @@ public class Game {
 
         // nothing happens. just go on with the game
         return Situation.Nothing;
-    }
-
-    // prints out an ugly version of the grid for debug purposes
-    public void debug() {
-        for (var row : this.grid) {
-            for (var cell : row) {
-                System.out.print(cell);
-            }
-            System.out.println();
-        }
     }
 
     // prints out a beautiful version of the grid
