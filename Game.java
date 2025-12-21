@@ -28,6 +28,24 @@ public class Game {
                     return "?";
             }
         }
+
+        public String prettyStringFG() {
+            switch (this) {
+                case X:
+                    return ANSI.FG_BLUE + "X" + ANSI.RESET;
+                case O:
+                    return ANSI.FG_RED + "O" + ANSI.RESET;
+                case EMPTY:
+                    return " ";
+                default:
+                    return "?";
+            }
+        }
+
+        // prettyStringFG() surrounded by spaces. used when printing the grid
+        public String prettyStringFGSurround() {
+            return " " + this.prettyStringFG() + " ";
+        }
     }
 
     // describes situations that can occur after a turn
@@ -75,8 +93,13 @@ public class Game {
             }
         }
 
+        grid[move.row()][move.col()] = mark;
+
         this.turns += 1;
 
+        // check wins
+
+        // check draw
         var noEmptys = true;
         for (var row : this.grid) {
             for (var cell : row) {
@@ -94,6 +117,7 @@ public class Game {
             return Situation.Draw;
         }
 
+        // nothing happens. just go on with the game
         return Situation.Nothing;
     }
 
@@ -105,5 +129,31 @@ public class Game {
             }
             System.out.println();
         }
+    }
+
+    // prints out a beautiful version of the grid
+    // TODO fix formatting1
+    public void display() {
+        System.out.println(
+                Box.TOP_LEFT + Box.HORIZONTAL.repeat(3) + Box.TOP_DOWN + Box.HORIZONTAL.repeat(3) + Box.TOP_DOWN
+                        + Box.HORIZONTAL.repeat(3) + Box.TOP_RIGHT);
+        System.out.println(Box.VERTICAL + this.grid[0][0].prettyStringFGSurround() + Box.VERTICAL
+                + this.grid[0][1].prettyStringFGSurround() + Box.VERTICAL
+                + this.grid[0][2].prettyStringFGSurround() + Box.VERTICAL);
+        System.out.println(Box.VERT_RIGHT + Box.HORIZONTAL.repeat(3) + Box.CROSS + Box.HORIZONTAL.repeat(3) + Box.CROSS
+                + Box.HORIZONTAL.repeat(3)
+                + Box.VERT_LEFT);
+        System.out.println(Box.VERTICAL + this.grid[1][0].prettyStringFGSurround() + Box.VERTICAL
+                + this.grid[1][1].prettyStringFGSurround() + Box.VERTICAL
+                + this.grid[1][2].prettyStringFGSurround() + Box.VERTICAL);
+        System.out.println(Box.VERT_RIGHT + Box.HORIZONTAL.repeat(3) + Box.CROSS + Box.HORIZONTAL.repeat(3) + Box.CROSS
+                + Box.HORIZONTAL.repeat(3)
+                + Box.VERT_LEFT);
+        System.out.println(Box.VERTICAL + this.grid[2][0].prettyStringFGSurround() + Box.VERTICAL
+                + this.grid[2][1].prettyStringFGSurround() + Box.VERTICAL
+                + this.grid[2][2].prettyStringFGSurround() + Box.VERTICAL);
+        System.out.println(
+                Box.BOTTOM_LEFT + Box.HORIZONTAL.repeat(3) + Box.BOTTOM_UP + Box.HORIZONTAL.repeat(3) + Box.BOTTOM_UP
+                        + Box.HORIZONTAL.repeat(3) + Box.BOTTOM_RIGHT);
     }
 }

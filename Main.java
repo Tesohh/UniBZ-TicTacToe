@@ -24,8 +24,8 @@ class Main {
                 System.out.println("dbg: " + situation);
                 break;
             }
+            game.display();
         }
 
-        // game.debug();
     }
 }

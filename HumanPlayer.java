@@ -26,18 +26,21 @@ public class HumanPlayer implements Player {
                 col = Integer.parseInt(input);
 
                 if (row < 1 || row > 3) {
-                    throw new IllegalArgumentException();
+                    System.out.println("Row and column must be between 1 and 3");
+                    continue;
                 }
                 if (col < 1 || col > 3) {
-                    throw new IllegalArgumentException();
+                    System.out.println("Row and column must be between 1 and 3");
+                    continue;
+                }
+                if (game.grid[row - 1][col - 1] != Game.Mark.EMPTY) {
+                    System.out.println("Cell is already occupied, pick another position!");
+                    continue;
                 }
                 break;
             } catch (NumberFormatException e) {
                 // for when Integer.parseInt() fails
                 System.out.println("Please input two valid numbers, in format \"row column\"");
-            } catch (IllegalArgumentException e) {
-                // for when row or col are invalid
-                System.out.println("Row and column must be between 1 and 3");
             }
         }
 
