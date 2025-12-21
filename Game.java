@@ -30,6 +30,14 @@ public class Game {
         }
     }
 
+    // describes situations that can occur after a turn
+    public enum Situation {
+        Nothing,
+        Player1Win,
+        Player2Win,
+        Draw;
+    }
+
     public Mark[][] grid;
     public int turns = 0; // when even = player 1's turn, when odd = player 2's turn
 
@@ -48,19 +56,45 @@ public class Game {
         }
     }
 
-    public void nextTurn() {
+    public Situation nextTurn() {
         Mark mark;
-        Player.MoveCoords move;
+        Player.Move move;
         if (turns % 2 == 0) {
             // turns is even, so its player 1 (X) turn
             mark = Mark.X;
             move = this.player1.nextMove(this, mark);
+            if (move.surrender()) {
+                return Situation.Player2Win;
+            }
         } else {
             // turns is odd, so its player 2 (O) turn
             mark = Mark.O;
             move = this.player2.nextMove(this, mark);
+            if (move.surrender()) {
+                return Situation.Player1Win;
+            }
         }
+
         this.turns += 1;
+
+        var noEmptys = true;
+        for (var row : this.grid) {
+            for (var cell : row) {
+                if (cell == Mark.EMPTY) {
+                    noEmptys = false;
+                    break;
+                }
+            }
+        }
+
+        // if there are no empty cells, it means that all cells are full.
+        // if there was a win at this point we would have already caught it, so this
+        // means that there was a draw
+        if (noEmptys) {
+            return Situation.Draw;
+        }
+
+        return Situation.Nothing;
     }
 
     // prints out an ugly version of the grid for debug purposes

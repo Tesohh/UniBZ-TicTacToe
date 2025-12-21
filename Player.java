@@ -9,15 +9,14 @@
  */
 interface Player {
     // record reference used: https://www.baeldung.com/java-record-keyword
-    public record MoveCoords(int row, int col) {
+    public record Move(int row, int col, boolean surrender) {
     }
 
     /**
-     * implementers shall return a move as (row, col) pair representing the cell to
-     * place a mark on.
+     * implementers shall return a move
      * implementers can also use `game` to check the current state of the game,
      * and `assignedMark` for display purposes.
      * WARNING: it's up to implementers to check if the coordinates are valid!
      */
-    public MoveCoords nextMove(Game game, Game.Mark assignedMark);
+    public Move nextMove(Game game, Game.Mark assignedMark);
 }

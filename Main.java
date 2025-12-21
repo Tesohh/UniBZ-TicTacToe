@@ -19,7 +19,11 @@ class Main {
         var game = new Game(player1, player2);
 
         while (true) {
-            game.nextTurn();
+            var situation = game.nextTurn();
+            if (situation != Game.Situation.Nothing) {
+                System.out.println("dbg: " + situation);
+                break;
+            }
         }
 
         // game.debug();

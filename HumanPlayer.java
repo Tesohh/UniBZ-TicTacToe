@@ -5,15 +5,26 @@ public class HumanPlayer implements Player {
 
     @Override
     // THe method from the Player interface
-    public Player.MoveCoords nextMove(Game game, Game.Mark assignedMark) {
+    public Player.Move nextMove(Game game, Game.Mark assignedMark) {
         var row = 0;
         var col = 0;
 
         while (true) {
             try {
                 System.out.print(assignedMark.prettyStringBG() + "'s turn > ");
-                row = Integer.parseInt(scanner.next());
-                col = Integer.parseInt(scanner.next());
+
+                var input = scanner.next();
+                if (input.equals("surrender")) {
+                    return new Move(0, 0, true);
+                }
+                row = Integer.parseInt(input);
+
+                input = scanner.next();
+                if (input.equals("surrender")) {
+                    return new Move(0, 0, true);
+                }
+                col = Integer.parseInt(input);
+
                 if (row < 1 || row > 3) {
                     throw new IllegalArgumentException();
                 }
@@ -30,6 +41,6 @@ public class HumanPlayer implements Player {
             }
         }
 
-        return new MoveCoords(row - 1, col - 1);
+        return new Move(row - 1, col - 1, false);
     }
 }
