@@ -13,13 +13,13 @@ public class HumanPlayer implements Player {
             try {
                 System.out.print(assignedMark.prettyStringBG() + "'s turn > ");
 
-                var input = scanner.next();
+                var input = scanner.next().strip().toLowerCase();
                 if (input.equals("surrender")) {
                     return new Move(0, 0, true);
                 }
                 row = Integer.parseInt(input);
 
-                input = scanner.next();
+                input = scanner.next().strip().toLowerCase();
                 if (input.equals("surrender")) {
                     return new Move(0, 0, true);
                 }
