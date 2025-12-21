@@ -20,7 +20,7 @@ class Main {
 
         while (true) {
             var situation = game.nextTurn();
-            if (situation != Game.Situation.Nothing) {
+            if (situation != Game.Situation.NOTHING) {
                 System.out.println("dbg: " + situation);
                 break;
             }

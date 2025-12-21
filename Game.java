@@ -1,10 +1,10 @@
 public class Game {
     // describes situations that can occur after a turn
     public enum Situation {
-        Nothing,
-        Player1Win,
-        Player2Win,
-        Draw;
+        NOTHING,
+        PLAYER1_WIN,
+        PLAYER2_WIN,
+        DRAW;
     }
 
     public Mark[][] grid;
@@ -33,14 +33,14 @@ public class Game {
             mark = Mark.X;
             move = this.player1.nextMove(this, mark);
             if (move.surrender()) {
-                return Situation.Player2Win;
+                return Situation.PLAYER2_WIN;
             }
         } else {
             // turns is odd, so its player 2 (O) turn
             mark = Mark.O;
             move = this.player2.nextMove(this, mark);
             if (move.surrender()) {
-                return Situation.Player1Win;
+                return Situation.PLAYER1_WIN;
             }
         }
 
@@ -54,9 +54,9 @@ public class Game {
         // if a win is detected, who would it be?
         Situation candidateWinner;
         if (mark == Mark.X) {
-            candidateWinner = Situation.Player1Win;
+            candidateWinner = Situation.PLAYER1_WIN;
         } else if (mark == Mark.O) {
-            candidateWinner = Situation.Player2Win;
+            candidateWinner = Situation.PLAYER2_WIN;
         } else {
             throw new IllegalArgumentException(
                     "invalid argument passed to checkWin. Can either be Mark.X or Mark.O. Should be unreachable.");
@@ -120,11 +120,11 @@ public class Game {
         // if there was a win at this point we would have already caught it, so this
         // means that there was a draw
         if (noEmptys) {
-            return Situation.Draw;
+            return Situation.DRAW;
         }
 
         // nothing happens. just go on with the game
-        return Situation.Nothing;
+        return Situation.NOTHING;
     }
 
     // prints out a beautiful version of the grid
