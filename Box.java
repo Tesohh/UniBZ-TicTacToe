@@ -1,5 +1,6 @@
 // special characters for drawing boxes
 // based on reference from: https://en.wikipedia.org/wiki/Box-drawing_characters
+// code written by me
 public class Box {
     public static final String TOP_LEFT = "╭";
     public static final String TOP_RIGHT = "╮";

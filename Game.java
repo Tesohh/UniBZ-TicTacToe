@@ -1,53 +1,4 @@
 public class Game {
-    public enum Mark {
-        EMPTY, // no mark placed
-        X, // player 1
-        O; // player 2
-
-        // properly formats the mark when printing etc.
-        public String toString() {
-            switch (this) {
-                case EMPTY:
-                    return " ";
-                case X:
-                    return "X";
-                case O:
-                    return "O";
-                default:
-                    return "?";
-            }
-        }
-
-        public String prettyStringBG() {
-            switch (this) {
-                case X:
-                    return ANSI.FG_BLACK + ANSI.BG_BLUE + " X " + ANSI.RESET;
-                case O:
-                    return ANSI.FG_BLACK + ANSI.BG_RED + " O " + ANSI.RESET;
-                default:
-                    return "?";
-            }
-        }
-
-        public String prettyStringFG() {
-            switch (this) {
-                case X:
-                    return ANSI.FG_BLUE + "X" + ANSI.RESET;
-                case O:
-                    return ANSI.FG_RED + "O" + ANSI.RESET;
-                case EMPTY:
-                    return " ";
-                default:
-                    return "?";
-            }
-        }
-
-        // prettyStringFG() surrounded by spaces. used when printing the grid
-        public String prettyStringFGSurround() {
-            return " " + this.prettyStringFG() + " ";
-        }
-    }
-
     // describes situations that can occur after a turn
     public enum Situation {
         Nothing,
@@ -97,16 +48,6 @@ public class Game {
 
         this.turns += 1;
         return checkWin(mark);
-    }
-
-    // prints out an ugly version of the grid for debug purposes
-    public void debug() {
-        for (var row : this.grid) {
-            for (var cell : row) {
-                System.out.print(cell);
-            }
-            System.out.println();
-        }
     }
 
     public Situation checkWin(Mark mark) throws IllegalArgumentException {

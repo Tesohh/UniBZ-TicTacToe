@@ -1,5 +1,6 @@
 // ANSI Codes to use for coloring text
 // based on reference from: https://gist.github.com/JBlond/2fea43a3049b38287e5e9cefc87b2124
+// code written by me
 public class ANSI {
     public static final String RESET = "\033[0m";
 

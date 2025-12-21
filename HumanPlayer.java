@@ -5,7 +5,7 @@ public class HumanPlayer implements Player {
 
     @Override
     // THe method from the Player interface
-    public Player.Move nextMove(Game game, Game.Mark assignedMark) {
+    public Player.Move nextMove(Game game, Mark assignedMark) {
         var row = 0;
         var col = 0;
 
@@ -33,7 +33,7 @@ public class HumanPlayer implements Player {
                     System.out.println("Row and column must be between 1 and 3");
                     continue;
                 }
-                if (game.grid[row - 1][col - 1] != Game.Mark.EMPTY) {
+                if (game.grid[row - 1][col - 1] != Mark.EMPTY) {
                     System.out.println("Cell is already occupied, pick another position!");
                     continue;
                 }
