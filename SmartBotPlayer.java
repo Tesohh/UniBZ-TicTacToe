@@ -57,9 +57,6 @@ public class SmartBotPlayer extends BasePlayer {
             var newGrid = cloneGrid(game);
             newGrid[move.row()][move.col()] = Mark.EMPTY;
             losingGrids.add(newGrid);
-
-            System.out.println("dbg: HI IM " + this.mark + " AND I LOST... GRIDS: " + losingGrids.size());
-            debugGrid(newGrid);
         }
     }
 

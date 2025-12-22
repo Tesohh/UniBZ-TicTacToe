@@ -43,6 +43,11 @@ class Main {
             player2 = new SmartBotPlayer();
             player1name = "human";
             player2name = "smart bot";
+        } else if (args[0].equals("-m")) {
+            player1 = new HumanPlayer();
+            player2 = new MemorySmartBotPlayer();
+            player1name = "human";
+            player2name = "memory smart bot";
         } else {
             player1 = new HumanPlayer();
             player2 = new HumanPlayer();
