@@ -3,6 +3,7 @@
 // code written by me
 public class ANSI {
     public static final String RESET = "\033[0m";
+    public static final String DIM = "\033[2m";
 
     // foregrounds
     public static final String FG_BLACK = "\033[0;30m";

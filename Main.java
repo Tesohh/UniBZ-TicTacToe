@@ -17,6 +17,7 @@ class Main {
         var player2 = new HumanPlayer();
 
         var game = new Game(player1, player2);
+        game.display();
 
         while (true) {
             var situation = game.nextTurn();
