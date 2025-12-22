@@ -1,5 +1,7 @@
 import java.util.Random;
 
+// this bot doesn't have any strategy.
+// it just chooses a random empty cell.
 public class DumbBotPlayer implements Player {
     Random random = new Random();
 

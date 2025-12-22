@@ -22,9 +22,35 @@ or her work.
 */
 class Main {
     public static void main(String[] args) {
-        System.out.println("programmed by: " + ANSI.FG_BLACK + ANSI.BG_PURPLE + " Tesini Simone " + ANSI.RESET);
-        var player1 = new HumanPlayer();
-        var player2 = new DumbBotPlayer();
+
+        Player player1;
+        Player player2;
+
+        String player1name;
+        String player2name;
+        if (args.length < 1) {
+            player1 = new HumanPlayer();
+            player2 = new HumanPlayer();
+            player1name = "human";
+            player2name = "human";
+        } else if (args[0].equals("-n")) {
+            player1 = new HumanPlayer();
+            player2 = new DumbBotPlayer();
+            player1name = "human";
+            player2name = "normal bot";
+        } else {
+            player1 = new HumanPlayer();
+            player2 = new HumanPlayer();
+            player1name = "human";
+            player2name = "human";
+            System.out.println("unknown argument: " + args[0]);
+        }
+
+        System.out.println("programmed by " + ANSI.FG_BLACK + ANSI.BG_PURPLE + " Tesini Simone " + ANSI.RESET);
+        System.out.printf("started in    %s %s %s vs %s %s %s mode\n", ANSI.FG_BLACK + ANSI.BG_BLUE, player1name,
+                ANSI.RESET,
+                ANSI.FG_BLACK + ANSI.BG_RED, player2name, ANSI.RESET);
+        System.out.println();
 
         var game = new Game(player1, player2);
 
