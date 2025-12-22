@@ -10,6 +10,7 @@
  * the computers would pick a move automatically etc.
  * this way, we can also do experiments to let two bots play against eachother
  */
+
 interface Player {
     // record reference used: https://www.baeldung.com/java-record-keyword
     public record Move(int row, int col, boolean surrender) {
@@ -22,5 +23,11 @@ interface Player {
      * WARNING: it's up to implementers to check if the coordinates provided by
      * users are valid!
      */
-    public Move nextMove(Game game, Mark assignedMark);
+    public Move nextMove(Game game);
+
+    public void handleSituation(Game game, Game.Situation situation, boolean myTurn);
+
+    public void setMark(Mark mark);
+
+    public Mark getMark();
 }

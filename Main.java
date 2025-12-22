@@ -13,10 +13,10 @@ or her work.
 /* USAGE:
 * no parameters: human vs human
 * -n: human vs (normal / dull / dumb bot)
-* -s: human vs (smart bot)
-* -m: human vs (smart memory bot)
-* -S: human vs (very smart bot)
-* --{flag1}-{flag2}: {flag} vs {flag} 
+* -s: human vs (smart bot) TODO
+* -m: human vs (smart memory bot) TODO
+* -S: human vs (very smart bot) TODO
+* --{flag1}-{flag2}: {flag} vs {flag} TODO
     * eg. --S-s: (very smart) vs smart
     * or  --S-S: (very smart) vs (very smart)
 */
@@ -38,6 +38,11 @@ class Main {
             player2 = new DumbBotPlayer();
             player1name = "human";
             player2name = "normal bot";
+        } else if (args[0].equals("-s")) {
+            player1 = new HumanPlayer();
+            player2 = new SmartBotPlayer();
+            player1name = "human";
+            player2name = "smart bot";
         } else {
             player1 = new HumanPlayer();
             player2 = new HumanPlayer();

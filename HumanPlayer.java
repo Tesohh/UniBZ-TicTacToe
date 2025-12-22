@@ -1,17 +1,17 @@
 import java.util.Scanner;
 
-public class HumanPlayer implements Player {
+public class HumanPlayer extends BasePlayer {
     public Scanner scanner = new Scanner(System.in); // TODO close this scanner
 
     @Override
     // THe method from the Player interface
-    public Player.Move nextMove(Game game, Mark assignedMark) {
+    public Player.Move nextMove(Game game) {
         var row = 0;
         var col = 0;
 
         while (true) {
             try {
-                System.out.print(assignedMark.prettyStringBG() + "'s turn > ");
+                System.out.print(this.mark.prettyStringBG() + "'s turn > ");
 
                 var input = scanner.next().strip().toLowerCase();
                 if (input.equals("surrender")) {
@@ -45,5 +45,10 @@ public class HumanPlayer implements Player {
         }
 
         return new Move(row - 1, col - 1, false);
+    }
+
+    @Override
+    public void handleSituation(Game game, Game.Situation situation, boolean myTurn) {
+        // we don't need to do anything here.
     }
 }

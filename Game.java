@@ -17,6 +17,9 @@ public class Game {
         this.player1 = player1;
         this.player2 = player2;
 
+        this.player1.setMark(Mark.X);
+        this.player2.setMark(Mark.O);
+
         this.grid = new Mark[3][3];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -26,19 +29,19 @@ public class Game {
     }
 
     public Situation nextTurn() {
-        Mark mark;
         Player.Move move;
+        Mark mark;
         if (turns % 2 == 0) {
             // turns is even, so its player 1 (X) turn
-            mark = Mark.X;
-            move = this.player1.nextMove(this, mark);
+            move = this.player1.nextMove(this);
+            mark = this.player1.getMark();
             if (move.surrender()) {
                 return Situation.PLAYER2_WIN;
             }
         } else {
             // turns is odd, so its player 2 (O) turn
-            mark = Mark.O;
-            move = this.player2.nextMove(this, mark);
+            move = this.player2.nextMove(this);
+            mark = this.player2.getMark();
             if (move.surrender()) {
                 return Situation.PLAYER1_WIN;
             }
@@ -46,8 +49,13 @@ public class Game {
 
         grid[move.row()][move.col()] = mark;
 
+        // tell the players the current situation and if it's their turn
+        var situation = checkWin(mark);
+        player1.handleSituation(this, situation, turns % 2 == 0);
+        player2.handleSituation(this, situation, turns % 2 != 0);
+
         this.turns += 1;
-        return checkWin(mark);
+        return situation;
     }
 
     Situation checkWin(Mark mark) throws IllegalArgumentException {
