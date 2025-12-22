@@ -57,17 +57,18 @@ class Main {
                 ANSI.FG_BLACK + ANSI.BG_RED, player2name, ANSI.RESET);
         System.out.println();
 
-        var game = new Game(player1, player2);
-
-        while (true) {
-            game.display();
-            var situation = game.nextTurn();
-            if (situation != Game.Situation.NOTHING) {
-                System.out.println("dbg: " + situation);
-                break;
+        while (true) { // every iteration is a new game
+            var game = new Game(player1, player2);
+            // TODO ask for input...
+            while (true) { // every iteration is a new turn
+                game.display();
+                var situation = game.nextTurn();
+                if (situation != Game.Situation.NOTHING) {
+                    System.out.println("dbg: " + situation);
+                    break;
+                }
+                System.out.println();
             }
-            System.out.println();
         }
-
     }
 }

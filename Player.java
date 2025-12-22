@@ -24,7 +24,7 @@ interface Player {
      */
     public Move nextMove(Game game);
 
-    public void handleSituation(Game game, Game.Situation situation, boolean myTurn);
+    public void handleSituation(Game game, Move move, Game.Situation situation, boolean myTurn);
 
     public void setMark(Mark mark);
 

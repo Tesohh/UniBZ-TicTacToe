@@ -48,7 +48,7 @@ public class HumanPlayer extends BasePlayer {
     }
 
     @Override
-    public void handleSituation(Game game, Game.Situation situation, boolean myTurn) {
+    public void handleSituation(Game game, Move move, Game.Situation situation, boolean myTurn) {
         // we don't need to do anything here.
     }
 }

@@ -51,8 +51,8 @@ public class Game {
 
         // tell the players the current situation and if it's their turn
         var situation = checkWin(mark);
-        player1.handleSituation(this, situation, turns % 2 == 0);
-        player2.handleSituation(this, situation, turns % 2 != 0);
+        player1.handleSituation(this, move, situation, turns % 2 == 0);
+        player2.handleSituation(this, move, situation, turns % 2 != 0);
 
         this.turns += 1;
         return situation;
