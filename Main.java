@@ -10,11 +10,21 @@ the original source of the ideas and information used in his
 or her work.
 */
 
+/* USAGE:
+* no parameters: human vs human
+* -n: human vs (normal / dull / dumb bot)
+* -s: human vs (smart bot)
+* -m: human vs (smart memory bot)
+* -S: human vs (very smart bot)
+* --{flag1}-{flag2}: {flag} vs {flag} 
+    * eg. --S-s: (very smart) vs smart
+    * or  --S-S: (very smart) vs (very smart)
+*/
 class Main {
     public static void main(String[] args) {
         System.out.println("programmed by: " + ANSI.FG_BLACK + ANSI.BG_PURPLE + " Tesini Simone " + ANSI.RESET);
         var player1 = new HumanPlayer();
-        var player2 = new HumanPlayer();
+        var player2 = new DumbBotPlayer();
 
         var game = new Game(player1, player2);
 

@@ -8,10 +8,10 @@ public class Game {
     }
 
     public Mark[][] grid;
-    private int turns = 0; // when even = player 1's turn, when odd = player 2's turn
+    int turns = 0; // when even = player 1's turn, when odd = player 2's turn
 
-    private Player player1;
-    private Player player2;
+    Player player1;
+    Player player2;
 
     public Game(Player player1, Player player2) {
         this.player1 = player1;
@@ -50,7 +50,7 @@ public class Game {
         return checkWin(mark);
     }
 
-    private Situation checkWin(Mark mark) throws IllegalArgumentException {
+    Situation checkWin(Mark mark) throws IllegalArgumentException {
         // if a win is detected, who would it be?
         Situation candidateWinner;
         if (mark == Mark.X) {
