@@ -1,6 +1,6 @@
 /*
  * i decided to use an interface so that i can write my code for the different
- * kinds of players:
+ * kinds of players, without having to care which kind of player it is in the game class.
  * - human
  * - computer with no strategy,
  * - computer that learns

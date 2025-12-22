@@ -17,15 +17,15 @@ class Main {
         var player2 = new HumanPlayer();
 
         var game = new Game(player1, player2);
-        game.display();
 
         while (true) {
+            game.display();
             var situation = game.nextTurn();
             if (situation != Game.Situation.NOTHING) {
                 System.out.println("dbg: " + situation);
                 break;
             }
-            game.display();
+            System.out.println();
         }
 
     }
