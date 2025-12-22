@@ -18,8 +18,7 @@ interface Player {
 
     /**
      * implementers shall return a move
-     * implementers can also use `game` to check the current state of the game,
-     * and `assignedMark` for display purposes.
+     * implementers can also use `game` to check the current state of the game
      * WARNING: it's up to implementers to check if the coordinates provided by
      * users are valid!
      */
