@@ -40,10 +40,10 @@ class Main {
             player2 = new HumanPlayer();
         }
 
-        System.out.println("programmed by " + ANSI.FG_BLACK + ANSI.BG_PURPLE + " Tesini Simone " + ANSI.RESET);
-        System.out.printf("started in    %s %s %s vs %s %s %s mode\n", ANSI.FG_BLACK + ANSI.BG_BLUE, player1.getName(),
-                ANSI.RESET,
-                ANSI.FG_BLACK + ANSI.BG_RED, player2.getName(), ANSI.RESET);
+        System.out.printf("programmed by %s\n", ANSI.style(ANSI.FG_BLACK, ANSI.BG_PURPLE, " Tesini Simone "));
+        System.out.printf("started in    %s vs %s mode\n",
+                ANSI.style(ANSI.FG_BLACK, ANSI.BG_BLUE, " " + player1.getName() + " "),
+                ANSI.style(ANSI.FG_BLACK, ANSI.BG_RED, " " + player2.getName() + " "));
         System.out.println();
 
         var scanner = new Scanner(System.in);
@@ -53,12 +53,15 @@ class Main {
         while (true) { // every iteration is a new game
             var game = new Game(player1, player2);
             if (player1Wins > 0 || player2Wins > 0) {
-                System.out.printf("Score:  %s %d : %d %s\n", Mark.X.prettyStringBG(), player1Wins, player2Wins,
+                System.out.printf("Score:  %s %d : %d %s\n",
+                        Mark.X.prettyStringBG(),
+                        player1Wins, player2Wins,
                         Mark.O.prettyStringBG());
             }
-            System.out.printf("%s%s P %slay  %s%s Q %suit  %s%s I %snstructions\n",
-                    ANSI.FG_BLACK, ANSI.BG_WHITE, ANSI.RESET, ANSI.FG_BLACK, ANSI.BG_WHITE, ANSI.RESET, ANSI.FG_BLACK,
-                    ANSI.BG_WHITE, ANSI.RESET);
+            System.out.printf("%slay  %suit  %snstructions\n",
+                    ANSI.style(ANSI.FG_BLACK, ANSI.BG_WHITE, " P "),
+                    ANSI.style(ANSI.FG_BLACK, ANSI.BG_WHITE, " Q "),
+                    ANSI.style(ANSI.FG_BLACK, ANSI.BG_WHITE, " I "));
             System.out.print("> ");
 
             // use a full line instead of just a byte so that users can also type "play" or
@@ -92,7 +95,7 @@ class Main {
                     System.out.printf("%s wins!\n\n", Mark.O.prettyStringBG());
                     break;
                 } else if (situation == Game.Situation.DRAW) {
-                    System.out.printf("%s%sDraw!%s\n\n", ANSI.FG_BLACK, ANSI.BG_WHITE, ANSI.RESET);
+                    System.out.printf("%s\n\n", ANSI.style(ANSI.FG_BLACK, ANSI.BG_WHITE, "Draw!"));
                     break;
                 }
                 System.out.println();
@@ -127,5 +130,38 @@ class Main {
         }
     }
 
-    static String instructions = String.format("TODO TODO");
+    static String instructions = String.format("""
+            This is a simple %s game.
+            To play, start the program, press %s, or %s then %s.
+            On every turn, you must type the %s, from 1 to 3, where you want to place your mark, and press %s.
+
+            If you haven't specified any flags when starting the program, this will make 2 humans play together.
+            You can use flags when running the program to choose a bot to play against:
+            * %s: human vs normal bot %s
+            * %s: human vs smart bot %s
+            * %s: human vs smart memory bot %s
+            * %s: human vs very smart bot %s
+
+            You can also specify a percentage when playing against the very smart bot,
+            by following the %s with a percentage like: %s to get 40%% difficulty.
+
+            You can also let two bots play against eachother, by specifying two flags, like %s.
+                            """,
+            ANSI.style(ANSI.FG_PURPLE, "Tic Tac Toe"),
+            ANSI.style(ANSI.FG_PURPLE, "[Enter]"),
+            ANSI.style(ANSI.FG_PURPLE, "[P]"),
+            ANSI.style(ANSI.FG_PURPLE, "[Enter]"),
+            ANSI.style(ANSI.FG_PURPLE, "row and column"),
+            ANSI.style(ANSI.FG_PURPLE, "[Enter]"),
+            ANSI.style(ANSI.FG_PURPLE, "-n"),
+            ANSI.style(ANSI.DIM, "(with no strategy)"),
+            ANSI.style(ANSI.FG_PURPLE, "-s"),
+            ANSI.style(ANSI.DIM, "(that learns from past matches)"),
+            ANSI.style(ANSI.FG_PURPLE, "-m"),
+            ANSI.style(ANSI.DIM, "(that learns from past matches and remembers them after quitting the game)"),
+            ANSI.style(ANSI.FG_PURPLE, "-S"),
+            ANSI.style(ANSI.DIM, "(which has a custom unbeatable algorithm)"),
+            ANSI.style(ANSI.FG_PURPLE, "-S"),
+            ANSI.style(ANSI.FG_PURPLE, "-S-40"),
+            ANSI.style(ANSI.FG_PURPLE, "-S-40 -m"));
 }

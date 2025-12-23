@@ -24,4 +24,13 @@ public class ANSI {
     public static final String BG_PURPLE = "\033[45m";
     public static final String BG_CYAN = "\033[46m";
     public static final String BG_WHITE = "\033[47m";
+
+    // helper function for styling
+    public static String style(String fg, String bg, String text) {
+        return fg + bg + text + ANSI.RESET;
+    }
+
+    public static String style(String fg, String text) {
+        return fg + text + ANSI.RESET;
+    }
 }

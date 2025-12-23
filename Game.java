@@ -143,25 +143,25 @@ public class Game {
                 "  " + Box.TOP_LEFT + Box.HORIZONTAL.repeat(3) + Box.TOP_DOWN + Box.HORIZONTAL.repeat(3) + Box.TOP_DOWN
                         + Box.HORIZONTAL.repeat(3) + Box.TOP_RIGHT);
         System.out.println(
-                ANSI.DIM + "1 " + ANSI.RESET + Box.VERTICAL + this.grid[0][0].prettyStringFGSurround() + Box.VERTICAL
-                        + this.grid[0][1].prettyStringFGSurround() + Box.VERTICAL
-                        + this.grid[0][2].prettyStringFGSurround() + Box.VERTICAL);
+                ANSI.DIM + "1 " + ANSI.RESET + Box.VERTICAL + this.grid[0][0].prettyStringFG() + Box.VERTICAL
+                        + this.grid[0][1].prettyStringFG() + Box.VERTICAL
+                        + this.grid[0][2].prettyStringFG() + Box.VERTICAL);
         System.out.println(
                 "  " + Box.VERT_RIGHT + Box.HORIZONTAL.repeat(3) + Box.CROSS + Box.HORIZONTAL.repeat(3) + Box.CROSS
                         + Box.HORIZONTAL.repeat(3)
                         + Box.VERT_LEFT);
         System.out.println(
-                ANSI.DIM + "2 " + ANSI.RESET + Box.VERTICAL + this.grid[1][0].prettyStringFGSurround() + Box.VERTICAL
-                        + this.grid[1][1].prettyStringFGSurround() + Box.VERTICAL
-                        + this.grid[1][2].prettyStringFGSurround() + Box.VERTICAL);
+                ANSI.DIM + "2 " + ANSI.RESET + Box.VERTICAL + this.grid[1][0].prettyStringFG() + Box.VERTICAL
+                        + this.grid[1][1].prettyStringFG() + Box.VERTICAL
+                        + this.grid[1][2].prettyStringFG() + Box.VERTICAL);
         System.out.println(
                 "  " + Box.VERT_RIGHT + Box.HORIZONTAL.repeat(3) + Box.CROSS + Box.HORIZONTAL.repeat(3) + Box.CROSS
                         + Box.HORIZONTAL.repeat(3)
                         + Box.VERT_LEFT);
         System.out.println(
-                ANSI.DIM + "3 " + ANSI.RESET + Box.VERTICAL + this.grid[2][0].prettyStringFGSurround() + Box.VERTICAL
-                        + this.grid[2][1].prettyStringFGSurround() + Box.VERTICAL
-                        + this.grid[2][2].prettyStringFGSurround() + Box.VERTICAL);
+                ANSI.DIM + "3 " + ANSI.RESET + Box.VERTICAL + this.grid[2][0].prettyStringFG() + Box.VERTICAL
+                        + this.grid[2][1].prettyStringFG() + Box.VERTICAL
+                        + this.grid[2][2].prettyStringFG() + Box.VERTICAL);
         System.out.println("  " +
                 Box.BOTTOM_LEFT + Box.HORIZONTAL.repeat(3) + Box.BOTTOM_UP + Box.HORIZONTAL.repeat(3) + Box.BOTTOM_UP
                 + Box.HORIZONTAL.repeat(3) + Box.BOTTOM_RIGHT);

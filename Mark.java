@@ -20,9 +20,9 @@ public enum Mark {
     public String prettyStringBG() {
         switch (this) {
             case X:
-                return ANSI.FG_BLACK + ANSI.BG_BLUE + " X " + ANSI.RESET;
+                return ANSI.style(ANSI.FG_BLACK, ANSI.BG_BLUE, " X ");
             case O:
-                return ANSI.FG_BLACK + ANSI.BG_RED + " O " + ANSI.RESET;
+                return ANSI.style(ANSI.FG_BLACK, ANSI.BG_RED, " O ");
             default:
                 return "?";
         }
@@ -31,18 +31,13 @@ public enum Mark {
     public String prettyStringFG() {
         switch (this) {
             case X:
-                return ANSI.FG_BLUE + "X" + ANSI.RESET;
+                return ANSI.style(ANSI.FG_BLUE, " X ");
             case O:
-                return ANSI.FG_RED + "O" + ANSI.RESET;
+                return ANSI.style(ANSI.FG_RED, " O ");
             case EMPTY:
-                return " ";
+                return "   ";
             default:
                 return "?";
         }
-    }
-
-    // prettyStringFG() surrounded by spaces. used when printing the grid
-    public String prettyStringFGSurround() {
-        return " " + this.prettyStringFG() + " ";
     }
 }
