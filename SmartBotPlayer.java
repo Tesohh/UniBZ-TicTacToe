@@ -13,7 +13,7 @@ public class SmartBotPlayer extends BasePlayer {
     public Player.Move nextMove(Game game) {
         int row;
         int col;
-        boolean hasWinningCombination = false;
+        int failCounter = 0;
         outer: while (true) {
             row = random.nextInt(0, 3);
             col = random.nextInt(0, 3);
@@ -31,15 +31,18 @@ public class SmartBotPlayer extends BasePlayer {
                 if (Arrays.deepEquals(simulation, grid)) {
                     // we need to use deepEqual as `==` would just check if the addresses are
                     // the same...
+                    failCounter += 1;
+                    if (failCounter == this.losingGrids.size()) {
+                        break outer;
+                    }
                     continue outer;
                 }
             }
 
-            hasWinningCombination = true;
             break;
         }
 
-        if (!hasWinningCombination) {
+        if (failCounter == this.losingGrids.size()) {
             // surrender!
             System.out.println(this.mark.prettyStringBG() + " [BOT] has surrendered!");
             return new Move(0, 0, true);
