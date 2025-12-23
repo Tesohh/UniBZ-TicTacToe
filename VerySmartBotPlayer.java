@@ -145,6 +145,6 @@ class VerySmartBotPlayer extends BasePlayer {
 
     @Override
     public String getName() {
-        return "very smart bot";
+        return "very smart bot (" + (int) (this.difficulty * 100) + "%)";
     }
 }

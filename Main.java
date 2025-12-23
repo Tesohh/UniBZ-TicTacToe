@@ -61,17 +61,29 @@ class Main {
     }
 
     static Player playerFromFlag(String flag) {
-        switch (flag) {
-            case "-n":
-                return new DumbBotPlayer();
-            case "-s":
-                return new SmartBotPlayer();
-            case "-m":
-                return new MemorySmartBotPlayer();
-            case "-S":
+        if (flag.equals("-n")) {
+            return new DumbBotPlayer();
+        } else if (flag.equals("-s")) {
+            return new SmartBotPlayer();
+        } else if (flag.equals("-m")) {
+            return new MemorySmartBotPlayer();
+        } else if (flag.equals("-S")) {
+            return new VerySmartBotPlayer();
+        } else if (flag.startsWith("-S-")) {
+            var maybePercentage = flag.substring(3);
+            try {
+                int percentage = Integer.parseInt(maybePercentage);
+                if (percentage < 0) {
+                    percentage = 0;
+                } else if (percentage > 100) {
+                    percentage = 100;
+                }
+                return new VerySmartBotPlayer((float) percentage / 100);
+            } catch (NumberFormatException e) {
                 return new VerySmartBotPlayer();
-            default:
-                return new HumanPlayer();
+            }
+        } else {
+            return new HumanPlayer();
         }
     }
 }
