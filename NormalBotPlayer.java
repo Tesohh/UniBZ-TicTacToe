@@ -2,7 +2,7 @@ import java.util.Random;
 
 // this bot doesn't have any strategy.
 // it just chooses a random empty cell.
-public class DumbBotPlayer extends BasePlayer {
+public class NormalBotPlayer extends BasePlayer {
     Random random = new Random();
 
     @Override

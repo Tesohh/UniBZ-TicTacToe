@@ -102,7 +102,7 @@ class Main {
 
     static Player playerFromFlag(String flag) {
         if (flag.equals("-n")) {
-            return new DumbBotPlayer();
+            return new NormalBotPlayer();
         } else if (flag.equals("-s")) {
             return new SmartBotPlayer();
         } else if (flag.equals("-m")) {

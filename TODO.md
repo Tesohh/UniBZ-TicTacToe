@@ -1,3 +1,1 @@
 - [ ] consider configuring formatter to format code in required style
-- [ ] remove all debug (dbg:) stuff
-- [ ] resolve all TODOs
