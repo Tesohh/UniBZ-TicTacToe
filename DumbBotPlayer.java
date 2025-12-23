@@ -22,4 +22,9 @@ public class DumbBotPlayer extends BasePlayer {
     public void handleSituation(Game game, Move move, Game.Situation situation, boolean myTurn) {
         // we don't need to do anything here.
     }
+
+    @Override
+    public String getName() {
+        return "normal bot";
+    }
 }

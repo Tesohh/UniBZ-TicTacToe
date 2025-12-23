@@ -78,4 +78,9 @@ public class SmartBotPlayer extends BasePlayer {
             System.out.println();
         }
     }
+
+    @Override
+    public String getName() {
+        return "smart bot";
+    }
 }

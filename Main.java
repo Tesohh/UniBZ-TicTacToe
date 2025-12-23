@@ -22,50 +22,28 @@ or her work.
 */
 class Main {
     public static void main(String[] args) {
-
         Player player1;
         Player player2;
 
-        String player1name;
-        String player2name;
-        if (args.length < 1) {
+        if (args.length == 1) {
             player1 = new HumanPlayer();
-            player2 = new HumanPlayer();
-            player1name = "human";
-            player2name = "human";
-        } else if (args[0].equals("-n")) {
-            player1 = new HumanPlayer();
-            player2 = new DumbBotPlayer();
-            player1name = "human";
-            player2name = "normal bot";
-        } else if (args[0].equals("-s")) {
-            player1 = new HumanPlayer();
-            player2 = new SmartBotPlayer();
-            player1name = "human";
-            player2name = "smart bot";
-        } else if (args[0].equals("-m")) {
-            player1 = new HumanPlayer();
-            player2 = new MemorySmartBotPlayer();
-            player1name = "human";
-            player2name = "memory smart bot";
-        } else if (args[0].equals("-S")) {
-            player1 = new HumanPlayer();
-            player2 = new VerySmartBotPlayer();
-            player1name = "human";
-            player2name = "very smart bot";
+            player2 = playerFromFlag(args[0]);
+        } else if (args.length == 2) {
+            player1 = playerFromFlag(args[0]);
+            player2 = playerFromFlag(args[1]);
         } else {
             player1 = new HumanPlayer();
             player2 = new HumanPlayer();
-            player1name = "human";
-            player2name = "human";
-            System.out.println("unknown argument: " + args[0]);
         }
 
         System.out.println("programmed by " + ANSI.FG_BLACK + ANSI.BG_PURPLE + " Tesini Simone " + ANSI.RESET);
-        System.out.printf("started in    %s %s %s vs %s %s %s mode\n", ANSI.FG_BLACK + ANSI.BG_BLUE, player1name,
+        System.out.printf("started in    %s %s %s vs %s %s %s mode\n", ANSI.FG_BLACK + ANSI.BG_BLUE, player1.getName(),
                 ANSI.RESET,
-                ANSI.FG_BLACK + ANSI.BG_RED, player2name, ANSI.RESET);
+                ANSI.FG_BLACK + ANSI.BG_RED, player2.getName(), ANSI.RESET);
         System.out.println();
+
+        int player1Wins = 0;
+        int player2Wins = 0;
 
         while (true) { // every iteration is a new game
             var game = new Game(player1, player2);
@@ -79,6 +57,21 @@ class Main {
                 }
                 System.out.println();
             }
+        }
+    }
+
+    static Player playerFromFlag(String flag) {
+        switch (flag) {
+            case "-n":
+                return new DumbBotPlayer();
+            case "-s":
+                return new SmartBotPlayer();
+            case "-m":
+                return new MemorySmartBotPlayer();
+            case "-S":
+                return new VerySmartBotPlayer();
+            default:
+                return new HumanPlayer();
         }
     }
 }

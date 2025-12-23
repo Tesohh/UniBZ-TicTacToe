@@ -29,4 +29,6 @@ interface Player {
     public void setMark(Mark mark);
 
     public Mark getMark();
+
+    public String getName();
 }

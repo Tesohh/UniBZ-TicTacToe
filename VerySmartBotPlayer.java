@@ -142,4 +142,9 @@ class VerySmartBotPlayer extends BasePlayer {
     public void handleSituation(Game game, Player.Move move, Game.Situation situation, boolean myTurn) {
         // don't need to do anything here
     }
+
+    @Override
+    public String getName() {
+        return "very smart bot";
+    }
 }
