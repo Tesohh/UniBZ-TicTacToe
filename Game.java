@@ -137,7 +137,6 @@ public class Game {
 
     // prints out a beautiful version of the grid
     // using the characters defined in Box class
-    // TODO fix formatting1
     public void display() {
         System.out.println(ANSI.DIM + "    1   2   3" + ANSI.RESET);
         System.out.println(

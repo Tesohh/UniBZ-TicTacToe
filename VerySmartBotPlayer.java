@@ -19,7 +19,6 @@ class VerySmartBotPlayer extends BasePlayer {
         // if a random float is bigger than the difficulty,
         // pick a random move, in DumbBotPlayer fashion
         if (random.nextFloat() > this.difficulty) {
-            System.out.println("dbg: picked EASY");
             return randomMove(game);
         }
 
@@ -30,7 +29,6 @@ class VerySmartBotPlayer extends BasePlayer {
             if (winCondition == -1)
                 continue;
             else {
-                System.out.println("dbg: picked ROW win condition");
                 displayMove(row, winCondition);
                 return new Move(row, winCondition, false);
             }
@@ -42,7 +40,6 @@ class VerySmartBotPlayer extends BasePlayer {
             if (winCondition == -1)
                 continue;
             else {
-                System.out.println("dbg: picked COL win condition");
                 displayMove(winCondition, col);
                 return new Move(winCondition, col, false);
             }
@@ -51,14 +48,12 @@ class VerySmartBotPlayer extends BasePlayer {
         // check diagonals and determine if there is a winning condition
         int winCondition = checkWinningCondition(game.grid[0][0], game.grid[1][1], game.grid[2][2]);
         if (winCondition != -1) {
-            System.out.println("dbg: picked DIAG TOPLEFT win condition");
             displayMove(winCondition, winCondition);
             return new Move(winCondition, winCondition, false);
         }
 
         winCondition = checkWinningCondition(game.grid[0][2], game.grid[1][1], game.grid[2][0]);
         if (winCondition != -1) {
-            System.out.println("dbg: picked DIAG TOPRIGHT win condition");
             displayMove(winCondition, 2 - winCondition);
             return new Move(winCondition, 2 - winCondition, false);
         }
@@ -66,25 +61,21 @@ class VerySmartBotPlayer extends BasePlayer {
         // NEXT: was there no winning condition?
         // check if the center is empty, if it is place there
         if (game.grid[1][1] == Mark.EMPTY) {
-            System.out.println("dbg: picked CENTER");
             displayMove(1, 1);
             return new Move(1, 1, false);
         }
 
         // NEXT: try the corners
         for (var pair : new int[][] { { 0, 0 }, { 0, 2 }, { 2, 0 }, { 2, 2 } }) {
-            System.out.println("dbg: picked CORNER");
             if (game.grid[pair[0]][pair[1]] == Mark.EMPTY) {
+                displayMove(pair[0], pair[1]);
                 return new Move(pair[0], pair[1], false);
             }
         }
 
         // NEXT: was the center cell, and all corners marked?
         // if it was, pick a random spot
-
-        var move = randomMove(game);
-        displayMove(move.row(), move.col());
-        return move;
+        return randomMove(game);
     }
 
     /**

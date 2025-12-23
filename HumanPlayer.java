@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class HumanPlayer extends BasePlayer {
-    public Scanner scanner = new Scanner(System.in); // TODO close this scanner
+    public Scanner scanner = new Scanner(System.in);
 
     @Override
     // THe method from the Player interface

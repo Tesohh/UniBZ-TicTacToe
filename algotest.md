@@ -1,8 +1,0 @@
-XXO
-OOX
-XOX
-
-XOO
-.X.
-X.O
-

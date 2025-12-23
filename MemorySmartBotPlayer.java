@@ -66,8 +66,13 @@ public class MemorySmartBotPlayer extends SmartBotPlayer {
                 writer.append("\n");
                 writer.close();
             } catch (IOException e) {
-                System.out.println("dbg: error while writing file: " + e);
+                // hide the error
             }
         }
+    }
+
+    @Override
+    public String getName() {
+        return "memory smart bot";
     }
 }
