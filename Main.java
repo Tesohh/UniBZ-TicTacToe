@@ -13,12 +13,12 @@ or her work.
 /* USAGE:
 * no parameters: human vs human
 * -n: human vs (normal / dull / dumb bot)
-* -s: human vs (smart bot) TODO
-* -m: human vs (smart memory bot) TODO
-* -S: human vs (very smart bot) TODO
-* --{flag1}-{flag2}: {flag} vs {flag} TODO
-    * eg. --S-s: (very smart) vs smart
-    * or  --S-S: (very smart) vs (very smart)
+* -s: human vs (smart bot)
+* -m: human vs (smart memory bot)
+* -S: human vs (very smart bot)
+* -S-{percentage}: human vs (very smart bot) with specified 0-100 difficulty (0% difficulty = dumb bot) 
+*
+* specify two flags to pick both players (eg. smart bot vs very smart bot at 20% difficulty = -s -S-20)
 */
 class Main {
     public static void main(String[] args) {
@@ -48,6 +48,11 @@ class Main {
             player2 = new MemorySmartBotPlayer();
             player1name = "human";
             player2name = "memory smart bot";
+        } else if (args[0].equals("-S")) {
+            player1 = new HumanPlayer();
+            player2 = new VerySmartBotPlayer();
+            player1name = "human";
+            player2name = "very smart bot";
         } else {
             player1 = new HumanPlayer();
             player2 = new HumanPlayer();
