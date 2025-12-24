@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Game {
     // describes situations that can occur after a turn
     public enum Situation {
@@ -9,6 +11,7 @@ public class Game {
 
     public Mark[][] grid;
     int turns = 0; // when even = player 1's turn, when odd = player 2's turn
+    int turnsOffset;
 
     Player player1;
     Player player2;
@@ -19,6 +22,13 @@ public class Game {
 
         this.player1.setMark(Mark.X);
         this.player2.setMark(Mark.O);
+
+        var random = new Random();
+        if (random.nextBoolean()) {
+            turnsOffset = 1;
+        } else {
+            turnsOffset = 0;
+        }
 
         this.grid = new Mark[3][3];
         for (int i = 0; i < 3; i++) {
@@ -31,7 +41,7 @@ public class Game {
     public Situation nextTurn() {
         Player.Move move;
         Mark mark;
-        if (turns % 2 == 0) {
+        if ((this.turns + this.turnsOffset) % 2 == 0) {
             // turns is even, so its player 1 (X) turn
             move = this.player1.nextMove(this);
             mark = this.player1.getMark();
@@ -51,8 +61,8 @@ public class Game {
 
         // tell the players the current situation and if it's their turn
         var situation = checkWin(mark);
-        player1.handleSituation(this, move, situation, turns % 2 == 0);
-        player2.handleSituation(this, move, situation, turns % 2 != 0);
+        player1.handleSituation(this, move, situation, (this.turns + this.turnsOffset) % 2 == 0);
+        player2.handleSituation(this, move, situation, (this.turns + this.turnsOffset) % 2 != 0);
 
         this.turns += 1;
         return situation;
