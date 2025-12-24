@@ -18,6 +18,8 @@ The requirements for this assignment were:
 - *"Normal"* computer player that selects random moves, described in @normal.
 - *"Smart"* computer player that learns and avoids losing moves, described in @smart.
 - Accept flags when executing the program to choose the kind of computer player to play against. See @cli for more.
+- Allow players to choose a name in human vs. human mode, and randomly assign a mark (`O` or `X`) to both.
+- Randomly choose who has the first move on each game.
 
 All of these requirements were implemented. In addition, I also implemented:
 - *Colorful and friendly* user interface using ANSI codes and Box drawing characters
