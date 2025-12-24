@@ -2,6 +2,7 @@
 
 #show: note.with(
   title: [Final Programming Project: Tic Tac Toe],
+  banana-color: rgb("#f984ef"),
   authors: (
     ([Tesini Simone], [UniBZ]),
   ),
@@ -102,7 +103,7 @@ The last algorithm I implemented is very interesting.
 Instead of remembering losing combinations, it dynamically picks the best possible move on every turn.
 
 At 100% difficulty, it is unbeatable. I never managed to win against it,
-and I even tried doing 5000 matches against a normal mode bot and the very smart bot always won.
+and I even tried doing 5000 matches against a normal mode bot and the very smart bot never lost.
 
 It works by checking each of these conditions in order:
 0. Based on the difficulty, randomly choose if we should actually perform the best move or a random one.
@@ -135,6 +136,8 @@ Some additional improvements that could be done in the future:
 - GUI frontend for the game
 - Networked multiplayer (human versus human)
 - Even smarter bot using the _minimax_ algorithm (https://www.geeksforgeeks.org/dsa/finding-optimal-move-in-tic-tac-toe-using-minimax-algorithm-in-game-theory)
+
+All code can be found on my github: https://github.com/Tesohh/UniBZ-TicTacToe
 
 = References
 Some references were used during the making of the project. *All code and ideas are original.*
