@@ -27,7 +27,8 @@ import java.util.Scanner;
 
 class Main {
     public static void main(String[] args) {
-        System.out.printf("programmed by %s\n", ANSI.style(ANSI.FG_BLACK, ANSI.BG_PURPLE, " Tesini Simone "));
+        System.out.printf("welcome to tic tac toe!\n\nprogrammed by %s\n",
+                ANSI.style(ANSI.FG_BLACK, ANSI.BG_PURPLE, " Tesini Simone "));
         var scanner = new Scanner(System.in);
 
         Player player1;
