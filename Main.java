@@ -73,7 +73,7 @@ class Main {
                     scanner.close();
                     return; // close the game..
                 } else if (input.charAt(0) == 'i') {
-                    System.out.println(instructions);
+                    System.out.println(INSTRUCTIONS);
                     continue;
                 } else if (input.charAt(0) != 'p') {
                     System.out.println("invalid command, try again!");
@@ -87,14 +87,17 @@ class Main {
                 game.display();
                 var situation = game.nextTurn();
                 if (situation == Game.Situation.PLAYER1_WIN) {
+                    game.display();
                     player1Wins += 1;
                     System.out.printf("%s wins!\n\n", Mark.X.prettyStringBG());
                     break;
                 } else if (situation == Game.Situation.PLAYER2_WIN) {
+                    game.display();
                     player2Wins += 1;
                     System.out.printf("%s wins!\n\n", Mark.O.prettyStringBG());
                     break;
                 } else if (situation == Game.Situation.DRAW) {
+                    game.display();
                     System.out.printf("%s\n\n", ANSI.style(ANSI.FG_BLACK, ANSI.BG_WHITE, "Draw!"));
                     break;
                 }
@@ -130,10 +133,11 @@ class Main {
         }
     }
 
-    static String instructions = String.format("""
+    static final String INSTRUCTIONS = String.format("""
             This is a simple %s game.
             To play, start the program, press %s, or %s then %s.
             On every turn, you must type the %s, from 1 to 3, where you want to place your mark, and press %s.
+            You can also type "surrender" to surrender.
 
             If you haven't specified any flags when starting the program, this will make 2 humans play together.
             You can use flags when running the program to choose a bot to play against:
