@@ -1,7 +1,12 @@
 import java.util.Scanner;
 
 public class HumanPlayer extends BasePlayer {
-    public Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
+    String name;
+
+    public HumanPlayer(String name) {
+        this.name = name;
+    }
 
     @Override
     // THe method from the Player interface
@@ -11,7 +16,7 @@ public class HumanPlayer extends BasePlayer {
 
         while (true) {
             try {
-                System.out.print(this.mark.prettyStringBG() + "'s turn > ");
+                System.out.print(this.mark.prettyStringBG() + "'s [" + this.name + "] turn > ");
 
                 var input = scanner.next().strip().toLowerCase();
                 if (input.equals("surrender")) {
@@ -54,6 +59,6 @@ public class HumanPlayer extends BasePlayer {
 
     @Override
     public String getName() {
-        return "human";
+        return this.name;
     }
 }

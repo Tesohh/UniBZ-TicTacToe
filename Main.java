@@ -22,36 +22,55 @@ or her work.
 * specify two flags to pick both players (eg. smart bot vs very smart bot at 20% difficulty = -s -S-20)
 */
 
+import java.util.Random;
 import java.util.Scanner;
 
 class Main {
     public static void main(String[] args) {
+        System.out.printf("programmed by %s\n", ANSI.style(ANSI.FG_BLACK, ANSI.BG_PURPLE, " Tesini Simone "));
+        var scanner = new Scanner(System.in);
+
         Player player1;
         Player player2;
 
         if (args.length == 1) {
-            player1 = new HumanPlayer();
+            player1 = new HumanPlayer("you");
             player2 = playerFromFlag(args[0]);
         } else if (args.length == 2) {
             player1 = playerFromFlag(args[0]);
             player2 = playerFromFlag(args[1]);
         } else {
-            player1 = new HumanPlayer();
-            player2 = new HumanPlayer();
+            System.out.print("First player's name: ");
+            var nameA = scanner.nextLine();
+            System.out.print("Second player's name: ");
+            var nameB = scanner.nextLine();
+
+            var playerA = new HumanPlayer(nameA);
+            var playerB = new HumanPlayer(nameB);
+
+            var random = new Random();
+            if (random.nextBoolean()) {
+                player1 = playerA;
+                player2 = playerB;
+            } else {
+                player1 = playerB;
+                player2 = playerA;
+            }
         }
 
-        System.out.printf("programmed by %s\n", ANSI.style(ANSI.FG_BLACK, ANSI.BG_PURPLE, " Tesini Simone "));
         System.out.printf("started in    %s vs %s mode\n",
                 ANSI.style(ANSI.FG_BLACK, ANSI.BG_BLUE, " " + player1.getName() + " "),
                 ANSI.style(ANSI.FG_BLACK, ANSI.BG_RED, " " + player2.getName() + " "));
         System.out.println();
 
-        var scanner = new Scanner(System.in);
         int player1Wins = 0;
         int player2Wins = 0;
 
         while (true) { // every iteration is a new game
             var game = new Game(player1, player2);
+            // to randomly select which mark starts, randomly choose if it should increment
+            // turns by 1
+
             if (player1Wins > 0 || player2Wins > 0) {
                 System.out.printf("Score:  %s %d : %d %s\n",
                         Mark.X.prettyStringBG(),
@@ -129,7 +148,7 @@ class Main {
                 return new VerySmartBotPlayer();
             }
         } else {
-            return new HumanPlayer();
+            return new HumanPlayer("human");
         }
     }
 
