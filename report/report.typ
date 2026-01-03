@@ -69,7 +69,8 @@ It works by simply picking a random cell from the $3 times 3$ grid.
 This was the second algorithm that was requested in the specification.
 
 It works by "intercepting" loss events (called `Situation`s internally),
-and then saving the grid without the last move in an `ArrayList` of grids.
+and then saving the grid without the last move in a `HashSet` of grids.
+I used a set as an optimization to make sure that the same losing combination doesn't appear twice.
 
 Then when the bot has to play a turn, it will pick a random move,
 but if that move would bring it to one of the losing combinations, it will try another random move.

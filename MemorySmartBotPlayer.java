@@ -50,7 +50,12 @@ public class MemorySmartBotPlayer extends SmartBotPlayer {
             // i lost. add the combination as a losing combination
             var newGrid = cloneGrid(game);
             newGrid[move.row()][move.col()] = Mark.EMPTY;
-            losingGrids.add(newGrid);
+            var added = this.losingGrids.add(newGrid);
+
+            // (added == false) => this.losingGrids already contained the newGrid
+            if (!added) {
+                return;
+            }
 
             // AND save it to a file..
             // based on reference from: https://www.baeldung.com/java-write-to-file

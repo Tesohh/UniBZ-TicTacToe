@@ -1,13 +1,14 @@
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 // this bot chooses a random empty cell, 
 // and checks whether it is a combination that led to a loss in the past.
 public class SmartBotPlayer extends BasePlayer {
     Random random = new Random();
 
-    ArrayList<Mark[][]> losingGrids = new ArrayList<Mark[][]>(); // list of losing grids
+    Set<Mark[][]> losingGrids = new HashSet<Mark[][]>(); // list of losing grids
 
     @Override
     public Player.Move nextMove(Game game) {
@@ -27,7 +28,7 @@ public class SmartBotPlayer extends BasePlayer {
             // in that case, try another move
             var simulation = cloneGrid(game);
             simulation[row][col] = this.mark;
-            for (var grid : losingGrids) {
+            for (var grid : this.losingGrids) {
                 if (Arrays.deepEquals(simulation, grid)) {
                     // we need to use deepEqual as `==` would just check if the addresses are
                     // the same...
@@ -42,7 +43,7 @@ public class SmartBotPlayer extends BasePlayer {
             break;
         }
 
-        if (failCounter == this.losingGrids.size()) {
+        if (this.losingGrids.size() > 0 && failCounter == this.losingGrids.size()) {
             // surrender!
             System.out.println(this.mark.prettyStringBG() + " [BOT] has surrendered!");
             return new Move(0, 0, true);
