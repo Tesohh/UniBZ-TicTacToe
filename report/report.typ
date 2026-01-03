@@ -29,6 +29,7 @@ All of these requirements were implemented. In addition, I also implemented:
   It tries to always reach at least a draw, making it practically unbeatable. Described in @verysmart.
 - Additional CLI flags for new kinds of computer players.
 - Ability to specify two CLI flags to let two computers play against eachother.
+- When the user inputs a play command, they can also specify flags, as seen in @cli to switch player types while the game is running.
 
 == CLI Usage <cli>
 If you haven't specified any flags when starting the program, this will make 2 humans play together.
@@ -43,6 +44,8 @@ by following the `-S` with a percentage like: `-S-40` to get 40% difficulty.
 
 You can also let two bots play against eachother, by specifying two flags.
 For example, `-n -S-40`, would pit a normal bot against a very smart bot at 40% difficulty.
+As a special case, `-h -h` pits two humans against eachother,
+which is useful when switching player types while the game is running with the play command.
 
 = Design choices
 Since I wanted to implement multiple algorithms for *computer players* ("bots"),
