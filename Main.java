@@ -31,33 +31,9 @@ class Main {
                 ANSI.style(ANSI.FG_BLACK, ANSI.BG_PURPLE, " Tesini Simone "));
         var scanner = new Scanner(System.in);
 
-        Player player1;
-        Player player2;
-
-        if (args.length == 1) {
-            player1 = new HumanPlayer("you");
-            player2 = playerFromFlag(args[0]);
-        } else if (args.length == 2) {
-            player1 = playerFromFlag(args[0]);
-            player2 = playerFromFlag(args[1]);
-        } else {
-            System.out.print("First player's name: ");
-            var nameA = scanner.nextLine();
-            System.out.print("Second player's name: ");
-            var nameB = scanner.nextLine();
-
-            var playerA = new HumanPlayer(nameA);
-            var playerB = new HumanPlayer(nameB);
-
-            var random = new Random();
-            if (random.nextBoolean()) {
-                player1 = playerA;
-                player2 = playerB;
-            } else {
-                player1 = playerB;
-                player2 = playerA;
-            }
-        }
+        var players = parsePlayers(args, scanner);
+        Player player1 = players[0];
+        Player player2 = players[1];
 
         System.out.printf("started in    %s vs %s mode\n",
                 ANSI.style(ANSI.FG_BLACK, ANSI.BG_BLUE, " " + player1.getName() + " "),
@@ -126,6 +102,38 @@ class Main {
         }
     }
 
+    static Player[] parsePlayers(String[] args, Scanner scanner) {
+        Player player1;
+        Player player2;
+
+        if (args.length == 1) {
+            player1 = new HumanPlayer("you");
+            player2 = playerFromFlag(args[0]);
+        } else if (args.length == 2 && !(args[0].equals("-h") && args[1].equals("-h"))) {
+            player1 = playerFromFlag(args[0]);
+            player2 = playerFromFlag(args[1]);
+        } else {
+            System.out.print("First player's name: ");
+            var nameA = scanner.nextLine();
+            System.out.print("Second player's name: ");
+            var nameB = scanner.nextLine();
+
+            var playerA = new HumanPlayer(nameA);
+            var playerB = new HumanPlayer(nameB);
+
+            var random = new Random();
+            if (random.nextBoolean()) {
+                player1 = playerA;
+                player2 = playerB;
+            } else {
+                player1 = playerB;
+                player2 = playerA;
+            }
+        }
+
+        return new Player[] { player1, player2 };
+    }
+
     static Player playerFromFlag(String flag) {
         if (flag.equals("-n")) {
             return new NormalBotPlayer();
@@ -170,6 +178,7 @@ class Main {
             by following the %s with a percentage like: %s to get 40%% difficulty.
 
             You can also let two bots play against eachother, by specifying two flags, like %s.
+            If you need to force two humans to play against eachother, use %s.
                             """,
             ANSI.style(ANSI.FG_PURPLE, "Tic Tac Toe"),
             ANSI.style(ANSI.FG_PURPLE, "[Enter]"),
@@ -187,5 +196,6 @@ class Main {
             ANSI.style(ANSI.DIM, "(which has a custom unbeatable algorithm)"),
             ANSI.style(ANSI.FG_PURPLE, "-S"),
             ANSI.style(ANSI.FG_PURPLE, "-S-40"),
-            ANSI.style(ANSI.FG_PURPLE, "-S-40 -m"));
+            ANSI.style(ANSI.FG_PURPLE, "-S-40 -m"),
+            ANSI.style(ANSI.FG_PURPLE, "-h -h"));
 }
