@@ -22,6 +22,7 @@ or her work.
 * specify two flags to pick both players (eg. smart bot vs very smart bot at 20% difficulty = -s -S-20)
 */
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -44,9 +45,6 @@ class Main {
         int player2Wins = 0;
 
         while (true) { // every iteration is a new game
-            var game = new Game(player1, player2);
-            // to randomly select which mark starts, randomly choose if it should increment
-            // turns by 1
 
             if (player1Wins > 0 || player2Wins > 0) {
                 System.out.printf("Score:  %s %d : %d %s\n",
@@ -62,22 +60,38 @@ class Main {
 
             // use a full line instead of just a byte so that users can also type "play" or
             // "instructions" or "quit" or whatever
-            var input = scanner.nextLine().toLowerCase();
+            var input = scanner.nextLine();
 
             if (input.length() >= 1) {
-                if (input.charAt(0) == 'q') {
+                if (input.toLowerCase().charAt(0) == 'q') {
                     scanner.close();
                     return; // close the game..
-                } else if (input.charAt(0) == 'i') {
+                } else if (input.toLowerCase().charAt(0) == 'i') {
                     System.out.println(INSTRUCTIONS);
                     continue;
-                } else if (input.charAt(0) != 'p') {
+                } else if (input.toLowerCase().charAt(0) == 'p') {
+                    var splits = input.split(" ");
+
+                    if (splits.length >= 2) {
+                        // based on reference from: https://www.geeksforgeeks.org/java/java-subarray/
+                        var playArgs = Arrays.copyOfRange(splits, 1, splits.length);
+
+                        players = parsePlayers(playArgs, scanner);
+                        player1 = players[0];
+                        player2 = players[1];
+
+                        System.out.printf("switched to %s vs %s mode\n",
+                                ANSI.style(ANSI.FG_BLACK, ANSI.BG_BLUE, " " + player1.getName() + " "),
+                                ANSI.style(ANSI.FG_BLACK, ANSI.BG_RED, " " + player2.getName() + " "));
+                        System.out.println();
+                    }
+                } else {
                     System.out.println("invalid command, try again!");
                     continue;
                 }
             }
 
-            // in any other case (user just pressed enter, or pressed p), play the game..
+            var game = new Game(player1, player2);
 
             while (true) { // every iteration is a new turn
                 game.display();
@@ -161,26 +175,30 @@ class Main {
         }
     }
 
-    static final String INSTRUCTIONS = String.format("""
-            This is a simple %s game.
-            To play, start the program, press %s, or %s then %s.
-            On every turn, you must type the %s, from 1 to 3, where you want to place your mark, and press %s.
-            You can also type "surrender" to surrender.
+    static final String INSTRUCTIONS = String.format(
+            """
+                    This is a simple %s game.
+                    To play, start the program, press %s, or %s then %s.
+                    You can even switch the player types by pressing %s, then typing flags (like the ones in the next paragraph) and finally %s.
+                    On every turn, you must type the %s, from 1 to 3, where you want to place your mark, and press %s.
+                    You can also type "surrender" to surrender.
 
-            If you haven't specified any flags when starting the program, this will make 2 humans play together.
-            You can use flags when running the program to choose a bot to play against:
-            * %s: human vs normal bot %s
-            * %s: human vs smart bot %s
-            * %s: human vs smart memory bot %s
-            * %s: human vs very smart bot %s
+                    If you haven't specified any flags when starting the program, this will make 2 humans play together.
+                    You can use flags when running the program to choose a bot to play against:
+                    * %s: human vs normal bot %s
+                    * %s: human vs smart bot %s
+                    * %s: human vs smart memory bot %s
+                    * %s: human vs very smart bot %s
 
-            You can also specify a percentage when playing against the very smart bot,
-            by following the %s with a percentage like: %s to get 40%% difficulty.
+                    You can also specify a percentage when playing against the very smart bot,
+                    by following the %s with a percentage like: %s to get 40%% difficulty.
 
-            You can also let two bots play against eachother, by specifying two flags, like %s.
-            If you need to force two humans to play against eachother, use %s.
-                            """,
+                    You can also let two bots play against eachother, by specifying two flags, like %s.
+                    If you need to force two humans to play against eachother, use %s.
+                                    """,
             ANSI.style(ANSI.FG_PURPLE, "Tic Tac Toe"),
+            ANSI.style(ANSI.FG_PURPLE, "[Enter]"),
+            ANSI.style(ANSI.FG_PURPLE, "[P]"),
             ANSI.style(ANSI.FG_PURPLE, "[Enter]"),
             ANSI.style(ANSI.FG_PURPLE, "[P]"),
             ANSI.style(ANSI.FG_PURPLE, "[Enter]"),

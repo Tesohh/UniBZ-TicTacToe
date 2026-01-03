@@ -148,3 +148,4 @@ Some references were used during the making of the project. *All code and ideas 
 - ANSI color codes: https://gist.github.com/JBlond/2fea43a3049b38287e5e9cefc87b2124
 - Java records: https://www.baeldung.com/java-record-keyword
 - Appending a line to a file: https://www.baeldung.com/java-write-to-file
+- taking a subarray from an array: https://www.geeksforgeeks.org/java/java-subarray/
