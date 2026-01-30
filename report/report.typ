@@ -8,6 +8,8 @@
   ),
 )
 
+#set text(font: "New Computer Modern Sans")
+
 = Introduction
 
 == Project overview

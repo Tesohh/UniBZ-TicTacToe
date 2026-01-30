@@ -26,7 +26,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
-class Main {
+class BTesiniSimoneTicTacToeRunner {
     public static void main(String[] args) {
         System.out.printf("welcome to tic tac toe!\n\nprogrammed by %s\n",
                 ANSI.style(ANSI.FG_BLACK, ANSI.BG_PURPLE, " Tesini Simone "));
